@@ -65,7 +65,7 @@ int main()
 
         return EXIT_SUCCESS;
     }
-    catch(const std::runtime_error &err)
+    catch (const std::runtime_error &err)
     {
         std::cerr << "Exception caught: " << err.what() << std::endl;
         return EXIT_FAILURE;
