@@ -15,6 +15,7 @@ Window::Window(int win_width, int win_height, const std::string &win_title) : wi
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     window_ptr = glfwCreateWindow(win_width, win_height, win_title.c_str(), nullptr, nullptr);
     if (!window_ptr)

@@ -5,10 +5,9 @@
 
 struct Model
 {
-    Model(const std::vector<float> &data);
+    Model(std::vector<float> vertex_data);
 
     unsigned int VAO;
-    std::vector<float> vertex_data;
 };
 
 #endif

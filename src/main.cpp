@@ -52,8 +52,8 @@ int main()
 
         while(!glfwWindowShouldClose(window.window_ptr))
         {
-            glClearColor(0.2f, 0.3f, 0.3f, 1.f);
-            glClear(GL_COLOR_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+            glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             glBindVertexArray(triangle.VAO);
             glDrawArrays(GL_TRIANGLES, 0, 3);
