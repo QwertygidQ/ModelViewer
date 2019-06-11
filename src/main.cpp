@@ -7,7 +7,9 @@
 #include <GLFW/glfw3.h>
 #include "libraries/stb_image.h"
 
+#include "headers/Shader.hpp"
 #include "headers/Window.hpp"
+#include "headers/Model.hpp"
 
 void initialize_stbi()
 {
@@ -36,6 +38,9 @@ int main()
         Window window(width, height, "Model viewer");
         initialize_glad();
         initialize_gl(width, height);
+
+        Shader shader("src/shaders/vertex.vert", "src/shaders/fragment.frag");
+        shader.use();
 
         while(!glfwWindowShouldClose(window.window_ptr))
         {
