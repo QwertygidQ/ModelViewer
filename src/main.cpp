@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <stdexcept>
+#include <vector>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -42,10 +43,21 @@ int main()
         Shader shader("src/shaders/vertex.vert", "src/shaders/fragment.frag");
         shader.use();
 
+        std::vector<float> vertices({
+            -0.5f, -0.5f, 0.0f,
+            0.5f, -0.5f, 0.0f,
+            0.0f, 0.5f, 0.0f
+        });
+        Model triangle(vertices);
+
         while(!glfwWindowShouldClose(window.window_ptr))
         {
             glClearColor(0.2f, 0.3f, 0.3f, 1.f);
             glClear(GL_COLOR_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+
+            glBindVertexArray(triangle.VAO);
+            glDrawArrays(GL_TRIANGLES, 0, 3);
+            glBindVertexArray(0);
 
             glfwSwapBuffers(window.window_ptr);
             glfwPollEvents();

@@ -1,7 +1,6 @@
 #include "../headers/Window.hpp"
 
 #include <stdexcept>
-#include <iostream>
 
 void terminate(const std::string &error)
 {
