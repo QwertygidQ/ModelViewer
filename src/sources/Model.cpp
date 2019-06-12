@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
+#include <iostream>
 
 void Model::load_model(const std::string &obj_path)
 {
@@ -38,7 +39,7 @@ void Model::load_model(const std::string &obj_path)
 
             normals.push_back(vec);
         }
-        else if (line.compare(0, 3, "vt") == 0)
+        else if (line.compare(0, 3, "vt ") == 0)
         {
             glm::vec2 vec;
             for (size_t i = 0; i < 2; i++)
@@ -72,9 +73,13 @@ void Model::set_up_VAO()
     {
         for (size_t ivertex = 0; ivertex < 3; ivertex++)
         {
-            glm::vec3 vertex = vertices[faces[iface][ivertex][0]];
+            glm::vec3 vertex = vertices[faces[iface][ivertex][VERTEX]];
             for (size_t i = 0; i < 3; i++)
                 vertex_data.push_back(vertex[i]);
+
+            glm::vec2 uv = uvs[faces[iface][ivertex][UV]];
+            for (size_t i = 0; i < 2; i++)
+                vertex_data.push_back(uv[i]);
         }
     }
 
@@ -89,8 +94,11 @@ void Model::set_up_VAO()
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0); // position
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0); // position
     glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(sizeof(float) * 3)); // uv
+    glEnableVertexAttribArray(1);
 
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);

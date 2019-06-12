@@ -9,8 +9,9 @@
 #include <glm/glm.hpp>
 #include "libraries/stb_image.h"
 
-#include "headers/Shader.hpp"
 #include "headers/Window.hpp"
+#include "headers/Shader.hpp"
+#include "headers/Texture.hpp"
 #include "headers/Model.hpp"
 
 void initialize_stbi()
@@ -43,6 +44,9 @@ int main()
 
         Shader shader("src/shaders/vertex.vert", "src/shaders/fragment.frag");
         shader.use();
+
+        Texture texture("uvmap.jpg");
+        texture.use();
 
         Model test("test_obj.obj");
 

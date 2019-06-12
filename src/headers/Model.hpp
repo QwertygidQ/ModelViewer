@@ -5,6 +5,13 @@
 #include <vector>
 #include <glm/glm.hpp>
 
+enum FaceIndex
+{
+    VERTEX = 0,
+    UV = 1,
+    NORMAL = 2
+};
+
 struct Model
 {
     Model(const std::string &obj_path);
