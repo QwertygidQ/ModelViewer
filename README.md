@@ -4,3 +4,5 @@ An OpenGL program for viewing Wavefront .obj files
 
 **Example usage:**  
 ./model_viewer test_obj.obj uvmap.jpg
+
+![](https://i.ibb.co/93RN2S1/asasasdad.png)
