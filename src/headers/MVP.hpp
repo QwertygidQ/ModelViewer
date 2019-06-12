@@ -6,17 +6,17 @@
 
 struct MVP
 {
-    MVP(const Shader &shader, float aspect_ratio);
+    MVP(const Shader &shader, float aspect_ratio, float speed);
     void apply();
 
     void handle_mouse_scroll(float yoffset);
 
     const Shader &shader;
     glm::mat4 model, view, projection;
-    float z_dist, yaw, pitch;
+    float speed;
 
 private:
-    void update_view();
+    void update_model();
 };
 
 #endif

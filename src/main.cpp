@@ -49,7 +49,7 @@ int main()
         texture.use();
 
         Model test("test_obj.obj");
-        MVP mvp(shader, width / (float)height);
+        MVP mvp(shader, width / (float)height, 2.0f);
 
         while(!glfwWindowShouldClose(window.window_ptr))
         {
