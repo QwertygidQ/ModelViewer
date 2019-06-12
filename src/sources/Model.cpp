@@ -108,3 +108,10 @@ Model::Model(const std::string &obj_path)
     load_model(obj_path);
     set_up_VAO();
 }
+
+void Model::draw() const
+{
+    glBindVertexArray(VAO);
+    glDrawArrays(GL_TRIANGLES, 0, faces.size() * 3);
+    glBindVertexArray(0);
+}

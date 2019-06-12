@@ -64,9 +64,7 @@ int main()
             glm::mat4 model = glm::rotate(glm::mat4(1.0f), (float)glfwGetTime() * glm::radians(10.0f), glm::vec3(1.0f, 1.0f, 0.0f));
             shader.setMat4("model", model);
 
-            glBindVertexArray(test.VAO);
-            glDrawArrays(GL_TRIANGLES, 0, test.faces.size() * 3);
-            glBindVertexArray(0);
+            test.draw();
 
             glfwSwapBuffers(window.window_ptr);
             glfwPollEvents();

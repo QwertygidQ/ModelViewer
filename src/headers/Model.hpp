@@ -15,6 +15,7 @@ enum FaceIndex
 struct Model
 {
     Model(const std::string &obj_path);
+    void draw() const;
 
     unsigned int VAO;
     std::vector<glm::vec3> vertices, normals;
