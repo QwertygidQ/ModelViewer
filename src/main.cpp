@@ -6,14 +6,13 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 #include "libraries/stb_image.h"
 
 #include "headers/Window.hpp"
 #include "headers/Shader.hpp"
 #include "headers/Texture.hpp"
 #include "headers/Model.hpp"
+#include "headers/MVP.hpp"
 
 void initialize_stbi()
 {
@@ -46,24 +45,18 @@ int main()
         Shader shader("src/shaders/vertex.vert", "src/shaders/fragment.frag");
         shader.use();
 
-        glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 0.0f, -5.0f), glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-        glm::mat4 projection = glm::perspective(glm::radians(45.0f), window.width / (float)window.height, 0.1f, 100.0f);
-        shader.setMat4("view", view);
-        shader.setMat4("projection", projection);
-
         Texture texture("uvmap.jpg");
         texture.use();
 
         Model test("test_obj.obj");
+        MVP mvp(shader, width / (float)height);
 
         while(!glfwWindowShouldClose(window.window_ptr))
         {
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            glm::mat4 model = glm::rotate(glm::mat4(1.0f), (float)glfwGetTime() * glm::radians(10.0f), glm::vec3(1.0f, 1.0f, 0.0f));
-            shader.setMat4("model", model);
-
+            mvp.apply();
             test.draw();
 
             glfwSwapBuffers(window.window_ptr);
