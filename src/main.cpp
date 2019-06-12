@@ -65,7 +65,7 @@ int main()
             shader.setMat4("model", model);
 
             glBindVertexArray(test.VAO);
-            glDrawArrays(GL_TRIANGLES, 0, test.faces.size());
+            glDrawArrays(GL_TRIANGLES, 0, test.faces.size() * 3);
             glBindVertexArray(0);
 
             glfwSwapBuffers(window.window_ptr);

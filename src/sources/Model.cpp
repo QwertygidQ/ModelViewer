@@ -6,7 +6,6 @@
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
-#include <iostream>
 
 void Model::load_model(const std::string &obj_path)
 {
