@@ -6,6 +6,7 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 #include "libraries/stb_image.h"
 
 #include "headers/Shader.hpp"
@@ -43,20 +44,15 @@ int main()
         Shader shader("src/shaders/vertex.vert", "src/shaders/fragment.frag");
         shader.use();
 
-        std::vector<float> vertices({
-            -0.5f, -0.5f, 0.0f,
-            0.5f, -0.5f, 0.0f,
-            0.0f, 0.5f, 0.0f
-        });
-        Model triangle(vertices);
+        Model test("test_obj.obj");
 
         while(!glfwWindowShouldClose(window.window_ptr))
         {
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            glBindVertexArray(triangle.VAO);
-            glDrawArrays(GL_TRIANGLES, 0, 3);
+            glBindVertexArray(test.VAO);
+            glDrawArrays(GL_TRIANGLES, 0, test.faces.size());
             glBindVertexArray(0);
 
             glfwSwapBuffers(window.window_ptr);
