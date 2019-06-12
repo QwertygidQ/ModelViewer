@@ -3,9 +3,9 @@
 #include <cstdlib>
 #include <glad/glad.h>
 
-Model::Model(std::vector<float> vertex_data)
+Model::Model(const std::vector<float> vertex_data)
 {
-    float *data = vertex_data.data();
+    const float *data = vertex_data.data();
     size_t size = vertex_data.size() * sizeof(float);
 
     glGenVertexArrays(1, &VAO);
@@ -21,4 +21,9 @@ Model::Model(std::vector<float> vertex_data)
 
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+Model::Model(const std::string &obj_path)
+{
+
 }
