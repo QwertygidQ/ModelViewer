@@ -7,6 +7,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include "libraries/stb_image.h"
 
 #include "headers/Window.hpp"
@@ -44,6 +45,13 @@ int main()
 
         Shader shader("src/shaders/vertex.vert", "src/shaders/fragment.frag");
         shader.use();
+
+        glm::mat4 model = glm::mat4(1.0f);
+        glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 0.0f, -5.0f), glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glm::mat4 projection = glm::perspective(glm::radians(45.0f), window.width / (float)window.height, 0.1f, 100.0f);
+        shader.setMat4("model", model);
+        shader.setMat4("view", view);
+        shader.setMat4("projection", projection);
 
         Texture texture("uvmap.jpg");
         texture.use();
