@@ -31,8 +31,21 @@ void initialize_gl(int viewport_width, int viewport_height)
     glEnable(GL_DEPTH_TEST);
 }
 
-int main()
+int main(int argc, char** argv)
 {
+    std::string model_path, uv_path;
+
+    if (argc != 3)
+    {
+        std::cerr << "Usage: model_viewer MODEL_PATH UVMAP_PATH" << std::endl;
+        return EXIT_FAILURE;
+    }
+    else
+    {
+        model_path = argv[1];
+        uv_path = argv[2];
+    }
+
     try
     {
         const int width = 800, height = 600;
@@ -45,10 +58,10 @@ int main()
         Shader shader("src/shaders/vertex.vert", "src/shaders/fragment.frag");
         shader.use();
 
-        Texture texture("uvmap.jpg");
+        Texture texture(uv_path);
         texture.use();
 
-        Model test("test_obj.obj");
+        Model model(model_path);
         MVP mvp(shader, width / (float)height, 2.0f);
 
         while(!glfwWindowShouldClose(window.window_ptr))
@@ -57,7 +70,7 @@ int main()
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             mvp.apply();
-            test.draw();
+            model.draw();
 
             glfwSwapBuffers(window.window_ptr);
             glfwPollEvents();
