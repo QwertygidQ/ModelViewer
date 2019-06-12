@@ -48,7 +48,7 @@ void Model::load_model(const std::string &obj_path)
         }
         else if (line.compare(0, 2, "f ") == 0)
         {
-            char c_trash;
+            char c_trash; // gets rid of slashes in f
 
             std::vector<glm::vec3> f;
             glm::vec3 vec;
